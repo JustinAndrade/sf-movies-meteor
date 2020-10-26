@@ -1,0 +1,169 @@
+body {
+  box-sizing: border-box;
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-size: 1.4rem;
+  margin: 0;
+  padding: 10px 5px;
+}
+
+@media screen and (max-width: 1200px) {
+  h1 {
+    font-size: 1.2rem;
+  }
+}
+
+h2 {
+  font-size: 1rem;
+  margin: 0;
+}
+
+p {
+  font-weight: 600;
+  margin: 15px 0 5px 0;
+}
+
+button {
+  background-color: #ffffff;
+  border: none;
+  bottom: 0;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #58a0e2;
+  filter: drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.1));
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 15px 0;
+  outline: none;
+  padding: 15px 0;
+  position: absolute;
+  width: 85%;
+}
+
+@media screen and (max-width: 768px) {
+  button {
+    position: relative;
+    padding: 10px 0;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    width: 75px;
+    font-size: 0.8rem;
+    float: right;
+  }
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+span {
+  font-size: 0.8rem;
+}
+
+a {
+  color: #58a0e2;
+}
+
+/* classes  */
+
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    display: block;
+  }
+}
+
+.sidebar {
+  background: #e6e6e6;
+  padding-left: 1.2rem;
+  position: relative;
+  width: 25%;
+}
+
+@media screen and (max-width: 1200px) {
+  .sidebar {
+    width: 35%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+  }
+}
+
+.searchbar {
+  border: none;
+  filter: drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.05));
+  padding: 7px 5px;
+  width: 80%;
+}
+
+.searchOptions {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .searchOptions {
+    flex-direction: row;
+    align-items: center;
+    width: 80%;
+  }
+}
+
+.cardContainer {
+  display: flex;
+  flex-wrap: wrap;
+  height: 80%;
+  justify-content: center;
+  margin-top: 80px;
+  width: 85%;
+}
+
+@media screen and (max-width: 768px) {
+  .cardContainer {
+    width: 100%;
+  }
+}
+
+.movieCard {
+  background: #e6e6e6;
+  border-radius: 10px;
+  border-top-left-radius: 0.5em;
+  border-top-right-radius: 0em;
+  border-bottom-right-radius: 0.5em;
+  border-bottom-left-radius: 0em;
+  filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.25));
+  height: 120px;
+  margin: 10px 10px;
+  padding-left: 15px;
+  padding-top: 15px;
+  width: 16%;
+}
+@media screen and (max-width: 1200px) {
+  .movieCard {
+    width: 40%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .movieCard {
+    text-align: center;
+    width: 80%;
+  }
+}
+
+.location {
+  font-size: 0.8rem;
+  font-weight: 100;
+}
