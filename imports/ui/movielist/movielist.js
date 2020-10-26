@@ -80,7 +80,7 @@ if(Meteor.isClient){
     },
 
     // Grabs the next 25 movies of the cache
-    'click .next': (event) => {
+    'click button': (event) => {
       const movieList = Session.get('cachedMovies')
       const copyList = movieList
       let start = Session.get('start')
