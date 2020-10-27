@@ -27,11 +27,13 @@ if(Meteor.isClient){
         // Creating MovieList to display on client
         myList.push(movie)
         count++
-        console.log(myList)
       })
-    Session.set('cachedMovies', res.data) // Cached List - used for "more button"
+
+    // Setting sessions for movies
+    Session.set('cachedMovies', res.data) // Cached List - used for "next and prev buttons"  * Might only need one of these
+    Session.set('sortedMovies', res.data) // Sorted List - used for Sorting. * Might only need one of these
     Session.set('movies', myList) // Original List
-    setTimeout(() =>Session.set('baseList', myList), 3000) // Base List to continue to pull from if query deleted.
+    Session.set('baseList', myList) // Base List to continue to pull from if query deleted.
 
     // Start and End count for pagination
     Session.set('start', 0)
@@ -68,37 +70,29 @@ if(Meteor.isClient){
     // Each key press will search for a result.
     'keyup .searchbar': (event) => {
       const query = event.target.value
-      Meteor.call('searchMovies', [query], (err, res) => {
-        if(err){
-          console.log(err)
-        }
-        let queriedList = []
-        let count = 0
-        res.data.forEach(movie => {
-          if(count >= 25){
-            // stopping loop once list is built
-            return 
-          }
-          // Setting the movies to the 25 length list
-          mapLinkGenerator(movie)
-          queriedList.push(movie)
-          count++
-        })
-      
-      if(query === ""){
+      if(query.length >= 1) {
+        // Pulling the cached movies to query
+        let myList = Session.get('cachedMovies')
+        // Filtering the movies based query
+        myList = myList.filter(movie => movie.title.toLowerCase() >= query.toLowerCase())
+
+        // Setting the list of queried movies
+        let start = 0
+        let end = 25
+        Session.set('start', start)
+        Session.set('end', end)
+        myList = myList.slice(start, end)
+        Session.set('movies', myList)
+      } else if(query === "" || myList.length < 1) {
         // If no query showcase default list.
         const baseList = Session.get('baseList')
         Session.set('movies', baseList)
-      } else {
-        // else showcase queried results
-        Session.set('movies', queriedList)
       }
-      })
     },
 
     // Grabs the next 25 movies in the cache
     'click .next': (event) => {
-      const movieList = Session.get('cachedMovies')
+      const movieList = Session.get('sortedMovies')
       const copyList = movieList
       let start = Session.get('start')
       let end = Session.get('end')
@@ -128,20 +122,20 @@ if(Meteor.isClient){
 
     // Sorting event handlers, I wasn't sure to create a helper function..  Since they are one liners I assumed this was fine.
     // ->
-    'click .sortYear': (list) => {
-      let myList = Session.get('movies')
-      myList.sort((a,b) => a.release_year > b.release_year ? 1 : b.release_year > a.release_year ? -1 : 0)
-      Session.set('movies', myList)
+    'click .sortYear': () => {
+      let myList = Session.get('sortedMovies')
+      sortArr(myList, 'release_year')
+      setList(myList)
     },
-    'click .sortTitle': (list) => {
-      let myList = Session.get('movies')
-      myList.sort((a,b) => a.title > b.title ? 1 : b.title > a.title ? -1 : 0)
-      Session.set('movies', myList)
+    'click .sortTitle': () => {
+      let myList = Session.get('sortedMovies')
+      sortArr(myList, 'title')
+      setList(myList)
     },
-    'click .sortLocation': (list) => {
-      let myList = Session.get('movies')
-      myList.sort((a,b) => a.locations > b.locations ? 1 : b.locations > a.locations ? -1 : 0)
-      Session.set('movies', myList)
+    'click .sortLocation': () => {
+      let myList = Session.get('sortedMovies')
+      sortArr(myList, 'locations')      
+      setList(myList)
     },    
     // ->
 
@@ -152,4 +146,22 @@ if(Meteor.isClient){
 // Function to generate a google page with location of movie
 const mapLinkGenerator = (movie) => {
   return movie.href = `https://www.google.com/maps/search/?api=1&query=${movie.locations}+San+Francisco+CA`
+}
+
+// Function to sort movies
+const sortArr = (arr, property) => {
+  let newArr = arr;
+  newArr.sort((a,b) => a[property] > b[property] ? 1 : b[property] > a[property] ? -1 : 0)
+  return newArr
+}
+
+// Setting list to the movies
+const setList = (arr) => {
+  let start = 0
+  let end = 25
+  Session.set('sortedMovies', arr)
+  Session.set('start', start)
+  Session.set('end', end)
+  let newArr = arr.slice(start, end)
+  return Session.set('movies', newArr)
 }
