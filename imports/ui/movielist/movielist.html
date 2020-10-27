@@ -3,29 +3,36 @@
         <div class="sidebar">
             <h1>Movies Filmed in SF</h1>
             <input class="searchbar" type="text" name="searchbar" placeholder="Search Titles, Years">
-            <p>Sort movies</p>
+            <h4>Sort movies</h4>
             <div class="searchOptions">
-                <div>
+                <div class="checkbox">
                     <input type="checkbox" name="byYear" class="sortYear">
                     <label for="byYear">by Year</label>
                 </div>
-                <div>
+                <div class="checkbox">
                     <input type="checkbox" name="byTitle" class="sortTitle">
                     <label for="byTitle">by Title</label>
                 </div>
-                <div>
+                <div class="checkbox">
                     <input type="checkbox" name="byLocation" class="sortLocation">
                     <label for="byLocation">by Location</label>
                 </div>
-                <button class="next">More</button>
-                <button class="prev">More</button>
+                <div class='btnContainer'>
+                    {{#if prevPage}}
+                        <button class="prev">Prev Page</button>
+                    {{/if}}
+                    
+                    {{#if nextPage}}
+                        <button class="next">Next page</button>
+                    {{/if}}
+                </div>
             </div>
         </div>
-        <div class="cardContainer">
-            {{#each movies}}
-            {{> movie}}
-            {{/each}}
-        </div>
+            <div class="cardContainer">
+                {{#each movies}}
+                {{> movie}}
+                {{/each}}
+            </div>
     </div>
 </body>
 
@@ -33,7 +40,10 @@
 <template name="movie">
     <div class="movieCard">
         <h2>{{title}}</h2>
-        <span>{{release_year}}</span>
+        <p>{{release_year}}</p>
+        {{#if locations}}
+            <span>Location: </span>
+        {{/if}}
         <p class="location"><a href="{{href}}" target="_blank">{{locations}}</a></p>
     </div>
 

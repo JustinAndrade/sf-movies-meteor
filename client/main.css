@@ -18,19 +18,17 @@ h1 {
 }
 
 h2 {
-  font-size: 1rem;
+  font-size: 1.2rem;
   margin: 0;
 }
 
 p {
-  font-weight: 600;
   margin: 15px 0 5px 0;
 }
 
 button {
   background-color: #ffffff;
   border: none;
-  bottom: 0;
   border-radius: 5px;
   cursor: pointer;
   color: #58a0e2;
@@ -40,24 +38,36 @@ button {
   margin: 15px 0;
   outline: none;
   padding: 15px 0;
-  position: absolute;
-  width: 85%;
+  width: 35%;
+}
+
+@media screen and (max-width: 1200px) {
+  button {
+    position: relative;
+    padding: 10px 0;
+    margin: 20px;
+    width: 75px;
+    font-size: 0.8rem;
+
+    /* Rotates the buttons to display properly */
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
 }
 
 @media screen and (max-width: 768px) {
   button {
     position: relative;
     padding: 10px 0;
-    margin: 0 auto;
-    margin-bottom: 20px;
+    margin: 20px;
     width: 75px;
     font-size: 0.8rem;
-    float: right;
   }
 }
 
 button:hover {
-  opacity: 0.9;
+  background: #58a0e2;
+  color: #ffffff;
 }
 
 span {
@@ -113,11 +123,43 @@ a {
   margin: 0;
 }
 
+h4 {
+  font-weight: 600;
+  margin: 10px 0;
+}
+
 @media screen and (max-width: 768px) {
   .searchOptions {
-    flex-direction: row;
-    align-items: center;
-    width: 80%;
+    display: inline-block;
+    width: 40%;
+    padding-bottom: 10px;
+  }
+  .searchOptions label {
+    font-size: 0.7rem;
+  }
+}
+
+.searchOptions .checkbox {
+  justify-content: space-around;
+  width: 50%;
+}
+
+.btnContainer {
+  display: flex;
+  justify-content: space-around;
+  position: absolute;
+  width: 100%;
+  padding-bottom: 25px;
+  bottom: 0;
+  left: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .btnContainer {
+    margin-top: 15px;
+    display: flex;
+    left: 40%;
+    width: 220px;
   }
 }
 
@@ -144,8 +186,8 @@ a {
   border-bottom-right-radius: 0.5em;
   border-bottom-left-radius: 0em;
   filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.25));
-  height: 120px;
-  margin: 10px 10px;
+  height: 140px;
+  margin: 7px 7px;
   padding-left: 15px;
   padding-top: 15px;
   width: 16%;

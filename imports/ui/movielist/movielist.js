@@ -1,6 +1,5 @@
 import './movielist.html';
 import { Template } from 'meteor/templating';
-import { HTTP } from 'meteor/http'
 import { Meteor } from 'meteor/meteor'
 import { Session } from 'meteor/session'
  
@@ -32,7 +31,7 @@ if(Meteor.isClient){
       })
     Session.set('cachedMovies', res.data) // Cached List - used for "more button"
     Session.set('movies', myList) // Original List
-    Session.set('baseList', myList) // Base List to continue to pull from if query deleted.
+    setTimeout(() =>Session.set('baseList', myList), 3000) // Base List to continue to pull from if query deleted.
 
     // Start and End count for pagination
     Session.set('start', 0)
@@ -40,9 +39,27 @@ if(Meteor.isClient){
   })
 
   Template.body.helpers({
+    isLoading: () => {
+      if(Session.get('movies')){
+        return true
+      } else {
+        return false
+      }
+    },
+
     movies: () => {
       return Session.get('movies')
     },
+    nextPage: () => {
+      if(Session.get('end') < 1000){
+        return true
+      }
+    },
+    prevPage: () => {
+      if(Session.get('end') > 25){
+        return true
+      }
+    }
 
   })
   
@@ -79,8 +96,8 @@ if(Meteor.isClient){
       })
     },
 
-    // Grabs the next 25 movies of the cache
-    'click button': (event) => {
+    // Grabs the next 25 movies in the cache
+    'click .next': (event) => {
       const movieList = Session.get('cachedMovies')
       const copyList = movieList
       let start = Session.get('start')
@@ -93,9 +110,23 @@ if(Meteor.isClient){
       }
       Session.set('movies',myList)
     },
+    // Grabs the last 25 movies in the cache
+    'click .prev': (event) => {
+      const movieList = Session.get('cachedMovies')
+      const copyList = movieList
+      let start = Session.get('start')
+      let end = Session.get('end')
+      Session.set('start', start -= 25)
+      Session.set('end', end -=25)
+      let myList = copyList.slice(start,end)
+      for(let movie of copyList){
+        mapLinkGenerator(movie)
+      }
+      Session.set('movies',myList)
+    },
+
 
     // Sorting event handlers, I wasn't sure to create a helper function..  Since they are one liners I assumed this was fine.
-
     // ->
     'click .sortYear': (list) => {
       let myList = Session.get('movies')
