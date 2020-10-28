@@ -86,6 +86,7 @@ if(Meteor.isClient){
         let end = 25
         Session.set('start', start)
         Session.set('end', end)
+        console.log(myList)
         myList = myList.slice(start, end)
         Session.set('movies', myList)
       } else if(query === "") {
