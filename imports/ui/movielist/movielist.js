@@ -70,26 +70,26 @@ if(Meteor.isClient){
     // Each key press will search for a result.
     'keyup .searchbar': (event) => {
       const query = event.target.value
-      if(query.length >= 1) {
-        // Pulling the cached movies to query
-        let myList = Session.get('cachedMovies')
-        // Filtering the movies based query
-        // Filter by year if year typed in
-        myList = myList.filter(movie =>  movie.release_year == query)
-        // If no year priortize title
-        if(myList.length < 1){
-          myList = Session.get('cachedMovies')
-          myList = myList.filter(movie =>  movie.title.toLowerCase().includes(query) && movie.title.toLowerCase() >= query.toLowerCase())
-        }
-        // Setting the list of queried movies
-        let start = 0
-        let end = 25
-        Session.set('start', start)
-        Session.set('end', end)
-        console.log(myList)
-        myList = myList.slice(start, end)
-        Session.set('movies', myList)
-      } else if(query === "") {
+
+      // Pulling the cached movies to query
+      let myList = Session.get('cachedMovies')
+      // Filtering the movies based query
+      // Filter by year if year typed in
+      myList = myList.filter(movie =>  movie.release_year == query)
+      // If no year priortize title
+      if(myList.length < 1){
+        myList = Session.get('cachedMovies')
+        myList = myList.filter(movie =>  movie.title.toLowerCase().includes(query) && movie.title.toLowerCase() >= query.toLowerCase())
+      }
+      // Setting the list of queried movies
+      let start = 0
+      let end = 25
+      Session.set('start', start)
+      Session.set('end', end)
+      console.log(myList)
+      myList = myList.slice(start, end)
+      Session.set('movies', myList)
+      if(query === "") {
         // If no query showcase default list.
         const baseList = Session.get('baseList')
         Session.set('movies', baseList)
