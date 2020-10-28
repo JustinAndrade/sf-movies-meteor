@@ -70,7 +70,6 @@ if(Meteor.isClient){
     // Each key press will search for a result.
     'keyup .searchbar': (event) => {
       const query = event.target.value
-
       // Pulling the cached movies to query
       let myList = Session.get('cachedMovies')
       // Filtering the movies based query
@@ -86,7 +85,6 @@ if(Meteor.isClient){
       let end = 25
       Session.set('start', start)
       Session.set('end', end)
-      console.log(myList)
       myList = myList.slice(start, end)
       Session.set('movies', myList)
       if(query === "") {
