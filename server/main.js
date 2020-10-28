@@ -13,10 +13,12 @@ if(Meteor.isServer){
         return result
       },
       // method to search movies
-      searchMovies: function(query){
-          result = HTTP.get(`https://data.sfgov.org/resource/yitu-d5am.json?title=${query}`)
-          return result
-      }
+      // Built into the API's endpoints but you have to search for the EXACT NAME.
+
+      // searchMovies: function(query){
+      //     result = HTTP.get(`https://data.sfgov.org/resource/yitu-d5am.json?title=${query}`)
+      //     return result
+      // }
     })
   })
 }

@@ -74,8 +74,13 @@ if(Meteor.isClient){
         // Pulling the cached movies to query
         let myList = Session.get('cachedMovies')
         // Filtering the movies based query
-        myList = myList.filter(movie => movie.title.toLowerCase() >= query.toLowerCase())
-
+        // Filter by year if year typed in
+        myList = myList.filter(movie =>  movie.release_year == query)
+        // If no year priortize title
+        if(myList.length < 1){
+          myList = Session.get('cachedMovies')
+          myList = myList.filter(movie =>  movie.title.toLowerCase().includes(query) && movie.title.toLowerCase() >= query.toLowerCase())
+        }
         // Setting the list of queried movies
         let start = 0
         let end = 25
@@ -83,7 +88,7 @@ if(Meteor.isClient){
         Session.set('end', end)
         myList = myList.slice(start, end)
         Session.set('movies', myList)
-      } else if(query === "" || myList.length < 1) {
+      } else if(query === "") {
         // If no query showcase default list.
         const baseList = Session.get('baseList')
         Session.set('movies', baseList)
