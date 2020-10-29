@@ -52,7 +52,7 @@ if(Meteor.isClient){
     // Searchbar
     // Each key press will search for a result.
     'keyup .searchbar': (event) => {
-      const query = event.target.value
+      const query = event.target.value.toLowerCase()
 
       // Pulling the cached movies to query
       let myList = Session.get('cachedMovies')
@@ -62,14 +62,17 @@ if(Meteor.isClient){
       // If no year priortize title
       if(myList.length < 1){
         myList = Session.get('cachedMovies')
-        myList = myList.filter(movie =>  movie.title.toLowerCase().includes(query) && movie.title.toLowerCase() >= query.toLowerCase())
+        myList = myList.filter(movie =>  {
+          const title = movie.title.toLowerCase()
+          return title.includes(query) && title >= query && title[0] === query[0]
+        })
       }
       // Setting the list of queried movies
       setList(myList)
       if(query === "") {
         // If no query showcase default list.
         const baseList = Session.get('baseList')
-        setList(baseList)
+        Session.set('movies', baseList)
       }
     },
 
