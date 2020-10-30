@@ -47,7 +47,7 @@ if(Meteor.isClient){
 
     },
 
-    // Grabs the next 25 movies in the cache
+    // Grabs the next 25 movies
     'click .next': () => {
       Session.set('prev', true)
       const sort = getSort(Session.get('sortedBy'))
@@ -83,7 +83,7 @@ if(Meteor.isClient){
     },
 
 
-    // Grabs the last 25 movies in the cache
+    // Grabs the last 25 movies
     'click .prev': () => {
       Session.set('next', true)
       const sort = getSort(Session.get('sortedBy'))
