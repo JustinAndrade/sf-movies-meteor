@@ -13,10 +13,17 @@ if(Meteor.isServer){
         if(query){
           if(query && sortedBy){
             result = HTTP.get(`https://data.sfgov.org/resource/wwmu-gmzc.json?$query=SELECT * WHERE starts_with(lower(title), '${query}') ORDER BY ${sortedBy} LIMIT 25 OFFSET ${offset}`)
+            if(result.data.length === 0){
+              result = HTTP.get(`https://data.sfgov.org/resource/wwmu-gmzc.json?$where=release_year = ${Number(query)} LIMIT 25`)
+              console.log('result')
+            }
             return result
           }
-          result = HTTP.get(`https://data.sfgov.org/resource/wwmu-gmzc.json?$where=starts_with(lower(title), '${query}') LIMIT 25`)
-          return result
+          // result = HTTP.get(`https://data.sfgov.org/resource/wwmu-gmzc.json?$where=starts_with(lower(title), '${query}') LIMIT 25`)
+          // if(query && result.data.length === 0){
+          //   result = HTTP.get(`https://data.sfgov.org/resource/wwmu-gmzc.json?$where=release_year = ${Number(query)} LIMIT 25`)
+          // }
+          // return result
         }
         if(sortedBy) {
           result = HTTP.get(`https://data.sfgov.org/resource/wwmu-gmzc.json?$order=${sortedBy} asc LIMIT 25 OFFSET ${offset.toString()}`)
