@@ -129,7 +129,7 @@ h4 {
   font-weight: 100;
 }
 
-/* TABLET MEDIA QUERIES */
+/* TABLET MEDIA / SMALLER SCREEN QUERIES */
 
 @media screen and (max-width: 1200px) {
   h1 {
