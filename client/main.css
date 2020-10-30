@@ -162,13 +162,12 @@ h4 {
   .options {
     display: flex;
     flex-direction: column;
-
     padding-top: 15px;
     width: 100%;
   }
 
   .searchOptions {
-    padding-bottom: 10px;
+    padding-bottom: 20px;
     padding-left: 1.2rem;
     width: 80%;
   }
@@ -176,13 +175,12 @@ h4 {
     font-size: 0.7rem;
   }
   .btnContainer {
-    position: relative;
     justify-content: flex-start;
-    right: 120%;
-    left: 1;
+    width: 50%;
+    left: 50%;
   }
   button {
-    width: 10%;
+    width: 125px;
   }
   .movieCard {
     width: 40%;
