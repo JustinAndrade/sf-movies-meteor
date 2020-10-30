@@ -43,7 +43,6 @@ if(Meteor.isClient){
       const sort = getSort(Session.get('sortedBy'))
       Session.set('searchQuery', query)
       Session.set('offset', 0)
-
       apiCall(sort)
 
     },
@@ -59,7 +58,7 @@ if(Meteor.isClient){
           console.log('error', err)
         };
     
-        // initializing list to hold 25 movies
+        // Generating google map links for each movie
         res.data.forEach(movie => {
             mapLinkGenerator(movie)
             if(movie.locations === undefined){
@@ -68,10 +67,11 @@ if(Meteor.isClient){
           })
 
         if(res.data.length > 0){
-          // Initializing movies
+          // Checking if next button should be rendered
           if(res.data.length < 25){
             Session.set('next', false)
           }
+          // Initializing movies
           Session.set('movies', res.data)
           Session.set('offset', offset)
         } else {
@@ -93,6 +93,8 @@ if(Meteor.isClient){
         offset -= 25
         Session.set('offset', offset)
       }
+
+      // Checking if next button should be rendered
       if(offset === 0){
         Session.set('prev', false)
       }
@@ -101,7 +103,7 @@ if(Meteor.isClient){
         if(err) {
           console.log('error', err)
         };
-        // initializing list to hold 25 movies
+        // Generating google map links for each movie
         res.data.forEach(movie => {
             mapLinkGenerator(movie)
             if(movie.locations === undefined){
@@ -169,6 +171,7 @@ function mapLinkGenerator(movie) {
   return movie.href = `https://www.google.com/maps/search/?api=1&query=${movie.locations}+San+Francisco+CA`
 }
 
+// Function that sorts through the sortedBy OBJ and returns the current truthy value
 function getSort(obj){
   for(let i in obj){
     if(obj[i] !== false){
@@ -177,6 +180,7 @@ function getSort(obj){
   }
 }
 
+// Dynamic query function that allows you to pull specific information from the database, uses state set from Session.
 function apiCall(sortedBy){
   Meteor.call('getMovies', sortedBy, Session.get('offset'), Session.get('searchQuery'), (err, res) => {
     if(err) {
@@ -189,7 +193,7 @@ function apiCall(sortedBy){
         Session.set('next', true)
       }
 
-      // initializing list to hold 25 movies
+      // Generating google map links for each movie
       res.data.forEach(movie => {
         mapLinkGenerator(movie)
         if(movie.locations === undefined){

@@ -4,10 +4,10 @@ import { Meteor } from 'meteor/meteor'
 
 // Fetching Books from third party API
 if(Meteor.isServer){
-    // Will run on inital load
+  // Will run on inital load
   Meteor.startup(function() {
     Meteor.methods({
-        // method to request movies
+      // method to request movies based on sorting, page, and possible query
       getMovies: function(sortedBy, offset, query) {
         let result = ''
         if(query){
