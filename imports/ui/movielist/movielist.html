@@ -3,30 +3,34 @@
         <div class="sidebar">
             <h1>Movies Filmed in SF</h1>
             <input class="searchbar" type="text" name="searchbar" placeholder="Search Titles, Years">
-            <h4>Sort movies</h4>
-            <div class="searchOptions">
-                <div class="checkbox">
-                    <input type="checkbox" name="byYear" class="sortYear">
-                    <label for="byYear">by Year</label>
+            <div class="options">
+                <div class="searchOptions">
+                    <h4>Sort movies</h4>
+                    <div class="options">
+                        <div class="checkbox">
+                            <input type="checkbox" name="byYear" class="sortYear">
+                            <label for="byYear">by Year</label>
+                        </div>
+                        <div class="checkbox">
+                            <input type="checkbox" name="byTitle" class="sortTitle">
+                            <label for="byTitle">by Title</label>
+                        </div>
+                        <div class="checkbox">
+                            <input type="checkbox" name="byLocation" class="sortLocation">
+                            <label for="byLocation">by Location</label>
+                        </div>
+                    </div>
                 </div>
-                <div class="checkbox">
-                    <input type="checkbox" name="byTitle" class="sortTitle">
-                    <label for="byTitle">by Title</label>
-                </div>
-                <div class="checkbox">
-                    <input type="checkbox" name="byLocation" class="sortLocation">
-                    <label for="byLocation">by Location</label>
-                </div>
-                <div class='btnContainer'>
-                    {{#if prevPage}}
-                        <button class="prev">Prev Page</button>
-                    {{/if}}
-                    
-                    {{#if nextPage}}
-                        <button class="next">Next page</button>
-                    {{/if}}
-                </div>
+            <div class='btnContainer'>
+                {{#if prevPage}}
+                <button class="prev">Prev Page</button>
+                {{/if}}
+                
+                {{#if nextPage}}
+                <button class="next">Next page</button>
+                {{/if}}
             </div>
+        </div>
         </div>
             <div class="cardContainer">
                 {{#each movies}}

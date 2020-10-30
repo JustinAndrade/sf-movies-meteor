@@ -15,7 +15,6 @@ if(Meteor.isServer){
             result = HTTP.get(`https://data.sfgov.org/resource/wwmu-gmzc.json?$query=SELECT * WHERE starts_with(lower(title), '${query}') ORDER BY ${sortedBy} LIMIT 25 OFFSET ${offset}`)
             if(result.data.length === 0){
               result = HTTP.get(`https://data.sfgov.org/resource/wwmu-gmzc.json?$where=release_year = ${Number(query)} LIMIT 25`)
-              console.log('result')
             }
             return result
           }
