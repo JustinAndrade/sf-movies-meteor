@@ -27,7 +27,7 @@
 
 #### Downloading and installing steps:
 #### Download the latest version of the config.
-#### CD into the project folder,
-#### Run meteor npm install and wait for packages to install.
-#### Run meteor afterwards.
+#### CD into the project folder.
+#### Run 'meteor npm install' in your console and wait for packages to install.
+#### Run 'meteor' afterwards in your console.
 #### Open localhost:3000 (by default) the app should be live.
