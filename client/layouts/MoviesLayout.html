@@ -1,12 +1,13 @@
-<body>
-    <div class="container">
-        <div class="sidebar">
-            <h1>Movies Filmed in SF</h1>
+<template name="MoviesLayout">
+    <div class="moviesPage container">
+        <div class="overlay">
+            <div class="sidebar">
+                <h1>Movies Filmed in SF</h1>
             <input class="searchbar" type="text" name="searchbar" placeholder="Search Titles, Years">
-            <div class="options">
+            <div>
                 <div class="searchOptions">
                     <h4>Sort movies</h4>
-                    <div class="options">
+                    <div>
                         <div class="checkbox">
                             <input type="checkbox" name="byYear" class="sortYear">
                             <label for="byYear">by Year</label>
@@ -21,14 +22,15 @@
                         </div>
                     </div>
                 </div>
-            <div class='btnContainer'>
-                {{#if prevPage}}
-                <button class="prev">Prev Page</button>
-                {{/if}}
-                
-                {{#if nextPage}}
-                <button class="next">Next page</button>
-                {{/if}}
+                <div class='btnContainer'>
+                    {{#if prevPage}}
+                    <button class="prev">Prev Page</button>
+                    {{/if}}
+                    
+                    {{#if nextPage}}
+                    <button class="next">Next page</button>
+                    {{/if}}
+                </div>
             </div>
         </div>
         </div>
@@ -38,7 +40,7 @@
                 {{/each}}
             </div>
     </div>
-</body>
+</template>
 
 
 <template name="movie">

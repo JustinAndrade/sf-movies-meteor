@@ -1,0 +1,45 @@
+@import "./styles/homepage.scss";
+@import "./styles/moviespage.scss";
+
+// Base Styling
+body {
+  box-sizing: border-box;
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-size: 1.4rem;
+  margin: 0;
+}
+
+h2 {
+  font-size: 1rem;
+  margin: 0;
+}
+
+h4 {
+  font-weight: 600;
+  margin: 10px 0;
+}
+
+p {
+  margin: 15px 0 5px 0;
+}
+
+input {
+  margin-left: 1.2rem;
+}
+
+span {
+  font-size: 0.8rem;
+}
+
+a {
+  color: #58a0e2;
+}
+
+.container {
+  height: 100%;
+}
