@@ -52,7 +52,7 @@ export function apiCall(sortedBy) {
             if (err) {
                 console.log("error", err);
                 // If we are receiving a list of movies run this.
-            } else if (res.data.length > 1) {
+            } else if (res.data.length >= 1) {
                 if (res.data.length < 25) {
                     Session.set("next", false);
                 } else if (res.data.length === 25) {
