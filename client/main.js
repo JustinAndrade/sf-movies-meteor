@@ -71,6 +71,7 @@ if (Meteor.isClient) {
         release_year: "release_year",
         locations: false,
       };
+      Session.set('prev', false)
       Session.set("sortedBy", sortedBy);
       pageHandler();
       apiCall(sortedBy.release_year);
@@ -83,7 +84,7 @@ if (Meteor.isClient) {
         release_year: false,
         locations: false,
       };
-
+      Session.set('prev', false)
       Session.set("sortedBy", sortedBy);
       pageHandler();
       apiCall(sortedBy.title);
@@ -96,7 +97,7 @@ if (Meteor.isClient) {
         release_year: false,
         locations: "locations",
       };
-
+      Session.set('prev', false)
       Session.set("sortedBy", sortedBy);
       pageHandler();
       apiCall(sortedBy.locations);
